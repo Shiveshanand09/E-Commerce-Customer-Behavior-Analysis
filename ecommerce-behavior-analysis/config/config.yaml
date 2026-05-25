@@ -1,0 +1,42 @@
+# ============================================================
+# E-Commerce Customer Behavior Analysis — Configuration
+# ============================================================
+
+# Data paths
+data_dir: "data"
+output_dir: "reports/output"
+
+# ETL pipeline settings
+etl:
+  schedule: "weekly"          # weekly | daily
+  lookback_days: 7            # days of data per run
+  churn_threshold_days: 90    # inactive days = churned
+  run_hour: 6                 # UTC hour to trigger automated run
+
+# RFM segmentation
+rfm:
+  quintiles: 5
+  snapshot_date: null         # null = today
+
+# Churn model
+churn_model:
+  model_type: "gbm"           # gbm | rf | lr
+  test_size: 0.20
+  cv_folds: 5
+
+# KMeans clustering
+kmeans:
+  n_clusters: 5
+  optimal_k_search: true
+  k_range: [2, 10]
+
+# Reporting
+report:
+  formats: ["markdown", "csv", "json"]
+  email_enabled: false
+  email_recipients: []
+
+# Logging
+logging:
+  level: "INFO"
+  file: "logs/pipeline.log"
